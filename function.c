@@ -159,7 +159,7 @@ void balence(long int a) {
 }
 
 void modify_acc(long int a) {
-	return;
+	
 }
 
 void close_account(long int a) {
