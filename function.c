@@ -10,7 +10,7 @@ double interest_fixed(double, float, int);
 void creat_acc();
 void transaction(long int);
 void balence(long int);
-void modify(long int);
+void modify_acc(long int);
 void close_account(long int);
 void menu();
 
@@ -158,8 +158,8 @@ void balence(long int a) {
 		printf("INVALID ACCOUNT NUMBER\n");	
 }
 
-void modify(long int a) {
-	
+void modify_acc(long int a) {
+	return;
 }
 
 void close_account(long int a) {
