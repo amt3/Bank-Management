@@ -3,12 +3,11 @@ typedef struct date {
 	int date, year, month;
 }date;
 typedef struct info {
-	char name[32], addrs[60], aadhar[16];
+	char name[32], addrs[60], aadhar[16], cont_no[10];
 	double amount;
 	int acc_type;
-	long int acc_no, cont_no;
+	long int acc_no;
 	date dob;
-	date dow;
 	date dod;
 	struct info *next, *prev;
 }info;

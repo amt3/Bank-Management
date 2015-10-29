@@ -37,15 +37,32 @@ void append(list *l, info a){
 }
 
 info *search(list *l, long int a) {
-	info *p = l->head;
-	while(p != l->tail) {
-		if(p->acc_no == a)
-			return p;
-		p = p->next;		
+	long int m;
+	info *p;
+	m = (l->tail->acc_no - l->head->acc_no) / 2;
+	if(a < m) {
+		p = l->head;
+		while(p != l->tail) {
+			if(p->acc_no == a)
+				return p;
+			p = p->next;		
+		}
+		if(p) {
+			if(p->acc_no == a)
+			return p;	
+		}
 	}
-	if(p) {
-		if(p->acc_no == a)
-		return p;	
+	else {
+		p = l->tail;
+		while(p != l->head){
+			if(p->acc_no == a)
+				return p;
+			p = p->prev;	
+		}
+		if(p) {
+			if(p->acc_no == a)
+				return p;	
+		}	
 	}
 	return NULL;
 }
@@ -80,10 +97,10 @@ void save_info(list *l) {
 	FILE *fp;
 	fp = fopen("data.txt", "w");
 	while(p != l->tail){
-		fprintf(fp, "%s %d/%d/%d %s %s %ld %d %lf %d/%d/%d %ld", p->name, p->dob.date, p->dob.month, p->dob.year, p->addrs, 				p->aadhar, p->cont_no, p->acc_type, p->amount, p->dod.date, p->dod.month, p->dod.year, p->acc_no);
+		fprintf(fp, "%s %d/%d/%d %s %s %s %d %lf %d/%d/%d %ld", p->name, p->dob.date, p->dob.month, p->dob.year, p->addrs, 				p->aadhar, p->cont_no, p->acc_type, p->amount, p->dod.date, p->dod.month, p->dod.year, p->acc_no);
 		p = p->next;
 	}
 	if(p)
-		fprintf(fp, "%s %d/%d/%d %s %s %ld %d %lf %d/%d/%d %ld", p->name, p->dob.date, p->dob.month, p->dob.year, p->addrs, 				p->aadhar, p->cont_no, p->acc_type, p->amount, p->dod.date, p->dod.month, p->dod.year, p->acc_no);
+		fprintf(fp, "%s %d/%d/%d %s %s %s %d %lf %d/%d/%d %ld", p->name, p->dob.date, p->dob.month, p->dob.year, p->addrs, 				p->aadhar, p->cont_no, p->acc_type, p->amount, p->dod.date, p->dod.month, p->dod.year, p->acc_no);
 	fclose(fp);
 }
