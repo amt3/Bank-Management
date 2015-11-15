@@ -268,7 +268,7 @@ void creat_acc() {
 	
 	fclose(fp);
 	
-	printf("NAME : %s\nACCOUNT NO. : %ld\nAvailable Balence : %lf\n", new.name, new.acc_no, new.amount);
+	printf("NAME : %s\nACCOUNT NO. : %ld\nAvailable Balence : Rs.%lf\n", new.name, new.acc_no, new.amount);
 	
 	fp = fopen("transaction_history.txt", "a"); 		//opens a file to store transaction history
 	
