@@ -1,13 +1,27 @@
+/*****************************************************************************
+ * Copyright (C) AMIT GANESH PAGRUT amtpagrut@gmail.com
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+ *****************************************************************************/
 #include<stdio.h>
-#include"list.h"
 #include<stdlib.h>
+#include"list_stack.h"
+
 void init(list *l) {
 	l->head = NULL;
 	l->tail = NULL;
 	l->length = 0;
 }
-info *traverse(list *l) {
+void traverse(list *l) {
 	info *p = l->head;
+	printf("\n");
 	while(p != l->tail){
 		printf("NAME : %s \nACCOUNT NO. : %ld\n\n", p->name, p->acc_no);
 		p = p->next;	
@@ -39,32 +53,50 @@ void append(list *l, info a){
 info *search(list *l, long int a) {
 	long int m;
 	info *p;
-	m = (l->tail->acc_no - l->head->acc_no) / 2;
-	if(a < m) {
-		p = l->head;
-		while(p != l->tail) {
-			if(p->acc_no == a)
-				return p;
-			p = p->next;		
-		}
-		if(p) {
-			if(p->acc_no == a)
-			return p;	
-		}
-	}
-	else {
-		p = l->tail;
-		while(p != l->head){
-			if(p->acc_no == a)
-				return p;
-			p = p->prev;	
-		}
-		if(p) {
-			if(p->acc_no == a)
+	if(l->head) {
+		m = (l->tail->acc_no - l->head->acc_no) / 2;
+		if(a < m) {
+			p = l->head;
+			while(p != l->tail) {
+				if(p->acc_no == a)
+					return p;
+				p = p->next;		
+			}
+			if(p) {
+				if(p->acc_no == a)
 				return p;	
-		}	
-	}
+			}
+		}
+		else {
+			p = l->tail;
+			while(p != l->head){
+				if(p->acc_no == a)
+					return p;
+				p = p->prev;	
+			}
+			if(p) {
+				if(p->acc_no == a)
+					return p;	
+			}	
+		}
+	} 
 	return NULL;
+}
+
+void searchname(char *str) {
+	info *p = l->head;
+	if(l->head) {
+		while(p != l->tail) {
+			if((strcmp(p->name, str)) == 0) {
+				push(*p);
+			}
+			p = p->next;
+		}
+		if(p) {
+			if((strcmp(p->name, str)) == 0)
+				push(*p);
+		}
+	}
 }
 
 void removelist(list *l, info *p) {
@@ -97,10 +129,10 @@ void save_info(list *l) {
 	FILE *fp;
 	fp = fopen("data.txt", "w");
 	while(p != l->tail){
-		fprintf(fp, "%s %d/%d/%d %s %s %s %d %lf %d/%d/%d %ld", p->name, p->dob.date, p->dob.month, p->dob.year, p->addrs, 				p->aadhar, p->cont_no, p->acc_type, p->amount, p->dod.date, p->dod.month, p->dod.year, p->acc_no);
+		fprintf(fp, "%s %d/%d/%d %s %s %s %d %lf %d/%d/%d %ld %d/%d/%d", p->name, p->dob.date, p->dob.month, p->dob.year, p->addrs, 				p->aadhar, p->cont_no, p->acc_type, p->amount, p->dod.date, p->dod.month, p->dod.year, p->acc_no, p->doc.date, p->doc.month, p->doc.year);
 		p = p->next;
 	}
 	if(p)
-		fprintf(fp, "%s %d/%d/%d %s %s %s %d %lf %d/%d/%d %ld", p->name, p->dob.date, p->dob.month, p->dob.year, p->addrs, 				p->aadhar, p->cont_no, p->acc_type, p->amount, p->dod.date, p->dod.month, p->dod.year, p->acc_no);
+		fprintf(fp, "%s %d/%d/%d %s %s %s %d %lf %d/%d/%d %ld %d/%d/%d", p->name, p->dob.date, p->dob.month, p->dob.year, p->addrs, 				p->aadhar, p->cont_no, p->acc_type, p->amount, p->dod.date, p->dod.month, p->dod.year, p->acc_no, p->doc.date, p->doc.month, p->doc.year);
 	fclose(fp);
 }
